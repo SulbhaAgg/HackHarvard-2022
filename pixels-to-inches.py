@@ -21,10 +21,10 @@ def click_event(event, x, y, flags, params):
             clickNum+=1
 
 def setPixelRatio(cardPts):
-    W1_px=sqrt((cardPts[0][0]-cardPts[1][0])**2+(cardPts[0][1]-cardPts[1][1]))#sqrt((x0-x1)^2-(y0-y1)^2)
-    H1_px=sqrt((cardPts[1][0]-cardPts[2][0])**2+(cardPts[1][1]-cardPts[2][1]))
-    W2_px=sqrt((cardPts[2][0]-cardPts[3][0])**2+(cardPts[2][1]-cardPts[3][1]))#sqrt((x0-x1)^2-(y0-y1)^2)
-    H2_px=sqrt((cardPts[3][0]-cardPts[0][0])**2+(cardPts[3][1]-cardPts[0][1]))
+    W1_px=sqrt((cardPts[0][0]-cardPts[1][0])**2+(cardPts[0][1]-cardPts[1][1])**2)#sqrt((x0-x1)^2-(y0-y1)^2)
+    H1_px=sqrt((cardPts[1][0]-cardPts[2][0])**2+(cardPts[1][1]-cardPts[2][1])**2)
+    W2_px=sqrt((cardPts[2][0]-cardPts[3][0])**2+(cardPts[2][1]-cardPts[3][1])**2)#sqrt((x0-x1)^2-(y0-y1)^2)
+    H2_px=sqrt((cardPts[3][0]-cardPts[0][0])**2+(cardPts[3][1]-cardPts[0][1])**2)
     ratio1Avg = (W1_px+W2_px)/(2*3.375) 
     ratio2Avg = (H1_px+H2_px)/(2*2.125)
     ratioAvg = (ratio1Avg+ratio2Avg)/2
@@ -32,7 +32,7 @@ def setPixelRatio(cardPts):
 
 
 def pixelToInches(line, ratio):
-    L_px=sqrt((line[0][0]-line[1][0])**2+(line[0][1]-line[1][1]))#sqrt((x0-x1)^2-(y0-y1)^2)
+    L_px=sqrt((line[0][0]-line[1][0])**2+(line[0][1]-line[1][1])**2)#sqrt((x0-x1)^2-(y0-y1)^2)
     L = L_px/ratio
     return L
 
@@ -44,7 +44,7 @@ if __name__=="__main__":
         
      
     # displaying the image
-    scale_percent = 30 # percent of original size
+    scale_percent = 20 # percent of original size
     width = int(img.shape[1] * scale_percent / 100)
     height = int(img.shape[0] * scale_percent / 100)
     dim = (width, height)
@@ -58,13 +58,12 @@ if __name__=="__main__":
         
      
     # wait for a key to be pressed to exit
-    k = cv2.waitKey(0)
     cv2.waitKey(0)  
-    if k == 27:
-        print(cardPoints)
-        ratio = setPixelRatio(cardPoints)
-        distance = pixelToInches(linePoints, ratio)
-        print(distance)
+    print(cardPoints)
+    ratio = setPixelRatio(cardPoints)
+    distance = pixelToInches(linePoints, ratio)
+    print(distance)
+        
         
     cv2.waitKey(0)
     # close the window
