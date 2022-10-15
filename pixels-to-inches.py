@@ -1,6 +1,7 @@
 from cmath import sqrt
 from weakref import ref
 import cv2
+from tabulate import tabulate
 from scipy.spatial import distance as dist
 from imutils import perspective
 from imutils import contours
@@ -93,3 +94,25 @@ if __name__=="__main__":
     cv2.waitKey(0)
     # close the window
     cv2.destroyAllWindows()
+
+def sizechart(distanceW, distanceL):
+    table = [['Mens T-Shirt Size', 'Width(inches)', 'Lenght(inches)'], ['XXS', 15, 26], ['XS', 17, 27], ['S',18, 28],  ['M', 20, 29], ['L', 22, 30], ['XL', 24, 31],['XXL', 26, 32],['3XL', 28, 33]]
+    print(tabulate(table, tablefmt='fancy_grid'))
+    size = "Values are innacurate"
+    if distanceW <= 15 and distanceL <= 26:
+        size = "XXS"
+    elif distanceW <= 17 and distanceL <= 27:
+        size = "XS"
+    elif distanceW <= 18 and distanceL <= 28:
+        size = "S"
+    elif distanceW <= 20 and distanceL <= 29:
+        size = "M"
+    elif distanceW <= 22 and distanceL <= 30:
+        size = "L"
+    elif distanceW <= 24 and distanceL <= 31:
+        size = "XL"
+    elif distanceW <= 26 and distanceL <= 32:
+        size = "XXL"
+    elif distanceW <= 28 and distanceL <= 33:
+        size = "3XL"
+    return size
