@@ -1,6 +1,5 @@
 from cmath import sqrt
 import cv2
-
 cardPoints = []
 linePoints = []
 clickNum = 0
@@ -21,13 +20,13 @@ def click_event(event, x, y, flags, params):
                 linePoints.append(ref0)
             clickNum+=1
 
-def setPixelRatio(cardPts, refL, refH):
-    L1_px=sqrt((cardPts[0][0]-cardPts[1][0])**2+(cardPts[0][1]-cardPts[1][1]))#sqrt((x0-x1)^2-(y0-y1)^2)
+def setPixelRatio(cardPts):
+    W1_px=sqrt((cardPts[0][0]-cardPts[1][0])**2+(cardPts[0][1]-cardPts[1][1]))#sqrt((x0-x1)^2-(y0-y1)^2)
     H1_px=sqrt((cardPts[1][0]-cardPts[2][0])**2+(cardPts[1][1]-cardPts[2][1]))
-    L2_px=sqrt((cardPts[2][0]-cardPts[3][0])**2+(cardPts[2][1]-cardPts[3][1]))#sqrt((x0-x1)^2-(y0-y1)^2)
+    W2_px=sqrt((cardPts[2][0]-cardPts[3][0])**2+(cardPts[2][1]-cardPts[3][1]))#sqrt((x0-x1)^2-(y0-y1)^2)
     H2_px=sqrt((cardPts[3][0]-cardPts[0][0])**2+(cardPts[3][1]-cardPts[0][1]))
-    ratio1Avg = (L1_px+L2_px)/(2*refL)
-    ratio2Avg = (H1_px+H2_px)/(2*refH)
+    ratio1Avg = (W1_px+W2_px)/(2*3.375) 
+    ratio2Avg = (H1_px+H2_px)/(2*2.125)
     ratioAvg = (ratio1Avg+ratio2Avg)/2
     return ratioAvg
 
@@ -59,10 +58,14 @@ if __name__=="__main__":
         
      
     # wait for a key to be pressed to exit
-    cv2.waitKey(0)
-    print(cardPoints) 
-    print(linePoints)
-    print(clickNum)
+    k = cv2.waitKey(0)
+    cv2.waitKey(0)  
+    if k == 27:
+        print(cardPoints)
+        ratio = setPixelRatio(cardPoints)
+        distance = pixelToInches(linePoints, ratio)
+        print(distance)
+        
     cv2.waitKey(0)
     # close the window
     cv2.destroyAllWindows()
