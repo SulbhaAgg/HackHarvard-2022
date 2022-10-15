@@ -1,4 +1,5 @@
 from cmath import sqrt
+from weakref import ref
 import cv2
 from scipy.spatial import distance as dist
 from imutils import perspective
@@ -8,17 +9,19 @@ import argparse
 import imutils
 cardPoints = []
 linePoints = []
+ref1 = []
 clickNum = 0
+wi = 3.375
 def midpoint(ptA, ptB):
 	return ((ptA[0] + ptB[0]) * 0.5, (ptA[1] + ptB[1]) * 0.5)
-
 
 
 def click_event(event, x, y, flags, params):
      
         if event == cv2.EVENT_LBUTTONDOWN:
+            
             ref0 = []
-            ref1 = []
+            global ref1
             ref0.append(x)
             ref0.append(y)
             ref1.append(ref0)
@@ -28,9 +31,13 @@ def click_event(event, x, y, flags, params):
                 cardPoints.append(ref0)
             elif(clickNum>=4 and clickNum<6):
                 linePoints.append(ref0)
-            clickNum+=1
             font = cv2.FONT_HERSHEY_SIMPLEX
             cv2.putText(resized_down,'.',(x,y), font, 1, (255,20,147), 10)
+            if clickNum != 0:
+                cv2.line(resized_down, ref1[clickNum-1], (x,y), (255,20,147), 10)
+            clickNum+=1
+            
+
             cv2.imshow('image', resized_down)
             
 
@@ -58,7 +65,7 @@ if __name__=="__main__":
         
      
     # displaying the image
-    scale_percent = 7 # percent of original size
+    scale_percent = 30 # percent of original size
     width = int(img.shape[1] * scale_percent / 100)
     height = int(img.shape[0] * scale_percent / 100)
     dim = (width, height)
@@ -69,7 +76,7 @@ if __name__=="__main__":
     
     cv2.setMouseCallback('image', click_event)
     
-
+    
         
      
     # wait for a key to be pressed to exit
@@ -77,8 +84,11 @@ if __name__=="__main__":
     print(cardPoints)
     ratio = setPixelRatio(cardPoints)
     distance = pixelToInches(linePoints, ratio)
+     
+    
+
     print(distance)
-        
+
         
     cv2.waitKey(0)
     # close the window
