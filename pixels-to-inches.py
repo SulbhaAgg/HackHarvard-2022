@@ -1,5 +1,10 @@
 from cmath import sqrt
 import cv2
+
+cardPoints = []
+linePoints = []
+clickNum = 0
+
 def click_event(event, x, y, flags, params):
      
         if event == cv2.EVENT_LBUTTONDOWN:
@@ -9,7 +14,12 @@ def click_event(event, x, y, flags, params):
             ref0.append(y)
             ref1.append(ref0)
             print(ref1)
-
+            global clickNum, linePoints, cardPoints
+            if(clickNum>=0 and clickNum<4):
+                cardPoints.append(ref0)
+            elif(clickNum>=4 and clickNum<6):
+                linePoints.append(ref0)
+            clickNum+=1
 
 def setPixelRatio(cardPts, refL, refH):
     L1_px=sqrt((cardPts[0][0]-cardPts[1][0])**2+(cardPts[0][1]-cardPts[1][1]))#sqrt((x0-x1)^2-(y0-y1)^2)
@@ -31,7 +41,7 @@ def pixelToInches(line, ratio):
 if __name__=="__main__":
     print("Hello")
     # reading the image
-    img = cv2.imread("1.jpg", 1)
+    img = cv2.imread("imgs/1.jpg", 1)
         
      
     # displaying the image
@@ -46,6 +56,9 @@ if __name__=="__main__":
      
     # wait for a key to be pressed to exit
     cv2.waitKey(0)
-     
+    print(cardPoints) 
+    print(linePoints)
+    print(clickNum)
+    cv2.waitKey(0)
     # close the window
     cv2.destroyAllWindows()
