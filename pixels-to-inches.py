@@ -1,8 +1,18 @@
 from cmath import sqrt
 import cv2
+from scipy.spatial import distance as dist
+from imutils import perspective
+from imutils import contours
+import numpy as np
+import argparse
+import imutils
 cardPoints = []
 linePoints = []
 clickNum = 0
+def midpoint(ptA, ptB):
+	return ((ptA[0] + ptB[0]) * 0.5, (ptA[1] + ptB[1]) * 0.5)
+
+
 
 def click_event(event, x, y, flags, params):
      
@@ -19,6 +29,10 @@ def click_event(event, x, y, flags, params):
             elif(clickNum>=4 and clickNum<6):
                 linePoints.append(ref0)
             clickNum+=1
+            font = cv2.FONT_HERSHEY_SIMPLEX
+            cv2.putText(resized_down,'.',(x,y), font, 1, (255,20,147), 10)
+            cv2.imshow('image', resized_down)
+            
 
 def setPixelRatio(cardPts):
     W1_px=sqrt((cardPts[0][0]-cardPts[1][0])**2+(cardPts[0][1]-cardPts[1][1])**2)#sqrt((x0-x1)^2-(y0-y1)^2)
@@ -44,7 +58,7 @@ if __name__=="__main__":
         
      
     # displaying the image
-    scale_percent = 20 # percent of original size
+    scale_percent = 7 # percent of original size
     width = int(img.shape[1] * scale_percent / 100)
     height = int(img.shape[0] * scale_percent / 100)
     dim = (width, height)
@@ -52,8 +66,9 @@ if __name__=="__main__":
     cv2.imshow('image', resized_down)
     # setting mouse handler for the image
     # and calling the click_event() function
-         
+    
     cv2.setMouseCallback('image', click_event)
+    
 
         
      
