@@ -41,12 +41,16 @@ def pixelToInches(line, ratio):
 if __name__=="__main__":
     print("Hello")
     # reading the image
-    img = cv2.imread("imgs/1.jpg", 1)
+    img = cv2.imread("imgs/1.jpg", cv2.IMREAD_UNCHANGED)
         
      
     # displaying the image
-    cv2.imshow('image', img)
-     
+    h, w, c = img.shape
+    down_width = w * (1/2)
+    down_height = h* (1/2)
+    down_points = (down_width, down_height)
+    resized_down = cv2.resize(img, down_points)
+    cv2.imshow('image', resized_down)
     # setting mouse handler for the image
     # and calling the click_event() function
          
