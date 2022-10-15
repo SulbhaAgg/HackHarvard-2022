@@ -45,11 +45,11 @@ if __name__=="__main__":
         
      
     # displaying the image
-    h, w, c = img.shape
-    down_width = w * (1/2)
-    down_height = h* (1/2)
-    down_points = (down_width, down_height)
-    resized_down = cv2.resize(img, down_points)
+    scale_percent = 30 # percent of original size
+    width = int(img.shape[1] * scale_percent / 100)
+    height = int(img.shape[0] * scale_percent / 100)
+    dim = (width, height)
+    resized_down = cv2.resize(img, dim, interpolation = cv2.INTER_AREA)
     cv2.imshow('image', resized_down)
     # setting mouse handler for the image
     # and calling the click_event() function
