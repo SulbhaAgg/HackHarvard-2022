@@ -52,7 +52,13 @@ def Get_SIze(type1,cardPoints1,linePoints,linePoints2,cardPoints2,linePoints3,li
         ratio = setPixelRatio(cardPoints1)
         d1_1 = pixelToInches(linePoints, ratio)
         d2_1 = pixelToInches(linePoints2, ratio)
-        a = (sizechart(d1_1, d2_1))
+        a = sizechart(d1_1, d2_1)
+    elif type1.lower == "pants":
+        ratio = setPixelRatio(cardPoints1)
+        d1_1 = pixelToInches(linePoints, ratio)
+        d2_1 = pixelToInches(linePoints2, ratio)
+        a = sizechartP(Perimeter(d1_1,d2_1))
+
     return a, s
 if __name__=="__main__":  
     Get_SIze()     
