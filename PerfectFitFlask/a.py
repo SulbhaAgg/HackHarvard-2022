@@ -48,7 +48,7 @@ def Get_SIze(type1,cardPoints1,linePoints,linePoints2,cardPoints2,linePoints3,li
         a, s = getSize(u,b)
         print(s)
         print(a)
-    elif type1.lower == "shirt":
+    elif type1.lower == "t-shirt":
         ratio = setPixelRatio(cardPoints1)
         d1_1 = pixelToInches(linePoints, ratio)
         d2_1 = pixelToInches(linePoints2, ratio)
