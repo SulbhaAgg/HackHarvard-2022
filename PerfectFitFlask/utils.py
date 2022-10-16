@@ -11,7 +11,7 @@ def getSize( underBreast, breast ):
     print(diff)
     cup = [ 'AAA' , 'AA' , 'A' , 'B' , 'C' , 'D' , 'DD' , 'DDD' , 'E' , 'F' , 'FF'
     , 'GG' , 'H' , 'HH' , 'J' , 'JJ' , 'K' , 'KK' , 'L' , 'LL' , 'M' , 'MM' , 'N' , 'O' , 'OO' , 'R' ]
-    return underBreast, cup[diff+1]
+    return math.floor(underBreast), cup[diff+1]
 def sizechart(distanceW, distanceL):
     if distanceW <= 15 and distanceL <= 26:
         size = "XXS"
