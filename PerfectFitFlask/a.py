@@ -1,13 +1,4 @@
 from cmath import sqrt
-from genericpath import getsize
-from weakref import ref
-from xml.etree.ElementTree import PI
-import cv2
-from imutils import perspective
-from imutils import contours
-import numpy as np
-import argparse
-import imutils
 from utils import *
 
 wi = 3.375
@@ -36,7 +27,9 @@ def pixelToInches(line, ratio):
 
 
 def Get_SIze(type1,cardPoints1,linePoints,linePoints2,cardPoints2,linePoints3,linePoints4):
-    if type1.lower == "bra":
+    a=''
+    s=''
+    if type1== "bra":
         ratio = setPixelRatio(cardPoints1)
         d1_1 = pixelToInches(linePoints, ratio)
         d2_1 = pixelToInches(linePoints2, ratio)
@@ -48,16 +41,17 @@ def Get_SIze(type1,cardPoints1,linePoints,linePoints2,cardPoints2,linePoints3,li
         a, s = getSize(u,b)
         print(s)
         print(a)
-    elif type1.lower == "t-shirt":
+    elif type1 == "t-shirt":
         ratio = setPixelRatio(cardPoints1)
         d1_1 = pixelToInches(linePoints, ratio)
         d2_1 = pixelToInches(linePoints2, ratio)
-        a = sizechart(d1_1, d2_1)
-    elif type1.lower == "pants":
+        s = sizechart(d1_1, d2_1)
+    elif type1 == "pants":
         ratio = setPixelRatio(cardPoints1)
         d1_1 = pixelToInches(linePoints, ratio)
-        d2_1 = pixelToInches(linePoints2, ratio)
-        a = sizechartP(Perimeter(d1_1,d2_1))
+        ratio2 = setPixelRatio(cardPoints2)
+        d2_1= pixelToInches(linePoints2, ratio)
+        s = sizechartP(Perimeter(d1_1,d2_1))
 
     return a, s
 if __name__=="__main__":  

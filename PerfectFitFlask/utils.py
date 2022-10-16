@@ -13,11 +13,12 @@ def getSize( underBreast, breast ):
     , 'GG' , 'H' , 'HH' , 'J' , 'JJ' , 'K' , 'KK' , 'L' , 'LL' , 'M' , 'MM' , 'N' , 'O' , 'OO' , 'R' ]
     return math.floor(underBreast), cup[diff+1]
 def sizechart(distanceW, distanceL):
-    if distanceW <= 15 and distanceL <= 26:
-        size = "XXS"
-    elif distanceW <= 17 and distanceL <= 27:
-        size = "XS"
-    elif distanceW <= 18 and distanceL <= 28:
+    size =''
+    #if distanceW <= 15 and distanceL <= 26:
+       # size = "S"
+    #elif distanceW <= 17 and distanceL <= 27:
+    #    size = "S"
+    if distanceW <= 15 and distanceL <= 20:
         size = "S"
     elif distanceW <= 20 and distanceL <= 29:
         size = "M"
@@ -32,6 +33,7 @@ def sizechart(distanceW, distanceL):
     return size
 
 def sizechartP(Perimeter):
+    size = ''
     if Perimeter >=26 and Perimeter <=27:
         size = "XXS"
     elif Perimeter >=27 and Perimeter <=29:

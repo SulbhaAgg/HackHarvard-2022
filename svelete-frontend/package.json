@@ -1,0 +1,40 @@
+{
+  "name": "ionicsvelte",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && vite build --ssr",
+    "build:client": "vite build",
+    "build:server": "vite build  --ssr",
+    "preview": "vite preview",
+    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "routes": "routify"
+  },
+  "devDependencies": {
+    "@rollup/plugin-alias": "^3.1.9",
+    "@roxi/routify": "^3.0.0-next.93",
+    "@sveltejs/vite-plugin-svelte": "^1.0.1",
+    "@tsconfig/svelte": "^3.0.0",
+    "autoprefixer": "^10.4.7",
+    "postcss": "^8.4.14",
+    "sass": "^1.52.2",
+    "spank": "^2.0.0-5",
+    "svelte": "^3.49.0",
+    "svelte-check": "^2.8.0",
+    "svelte-preprocess": "^4.10.7",
+    "tailwindcss": "^3.1.6",
+    "tslib": "^2.4.0",
+    "typescript": "^4.7.4",
+    "vite": "^3.0.2",
+    "vite-plugin-pwa": "^0.12.3"
+  },
+  "dependencies": {
+    "@ionic/core": "^6.1.8",
+    "svelte-icons-pack": "^2.0.0"
+  },
+  "routify": {
+    "pages": "./src/routes"
+  }
+}
